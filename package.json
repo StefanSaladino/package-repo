@@ -1,0 +1,25 @@
+{
+  "name": "@stefansaladino/contractor-ui",
+  "version": "1.0.0",
+  "description": "Reusable contractor website design system",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./styles.css": "./src/styles/styles.css"
+  },
+  "files": [
+    "src"
+  ],
+  "sideEffects": [
+    "./src/styles/styles.css"
+  ],
+  "keywords": [
+    "design-system",
+    "contractor",
+    "components",
+    "reusable-ui",
+    "esm"
+  ],
+  "license": "MIT"
+}

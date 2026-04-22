@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contractor UI Demo</title>
+  <meta name="description" content="Demo page for the Contractor UI design system." />
+  <link rel="stylesheet" href="../src/styles/styles.css" />
+</head>
+
+<body style="--site-header-offset: 96px;">
+  <!-- Mounted header -->
+  <div data-component="header"></div>
+
+  <main>
+    <section class="section reveal">
+      <div class="container">
+        <p class="eyebrow">Design System Demo</p>
+        <h1>Reusable components for fast, clean contractor websites.</h1>
+        <p>
+          This demo mounts all UI parts from a component registry, then initializes
+          their motion and interaction modules.
+        </p>
+      </div>
+    </section>
+
+    <!-- Parallax scroll component -->
+    <div
+      data-component="parallax-scroll"
+      data-props='{
+        "eyebrow":"Parallax Scroll",
+        "title":"Depth that moves with the page",
+        "text":"This section demonstrates a subtle scroll-based parallax effect built into the design system.",
+        "imageSrc":"https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=1600&q=80",
+        "imageAlt":"Construction and service visual"
+      }'
+    ></div>
+
+    <section class="section section--alt reveal">
+      <div class="container">
+        <div class="section-header">
+          <p class="eyebrow">Cards</p>
+          <h2>Reusable card system</h2>
+          <p>Cards are rendered from the package and can be reused anywhere.</p>
+        </div>
+        <div id="cards" class="grid grid-3"></div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="reviews">
+      <div class="container">
+        <div class="section-header">
+          <p class="eyebrow">Reviews</p>
+          <h2>Infinite review carousel</h2>
+          <p>The carousel mounts from the registry and auto-loops with hover pause.</p>
+        </div>
+        <div data-component="review-carousel"></div>
+      </div>
+    </section>
+
+    <section class="section section--alt reveal" id="timeline">
+      <div class="container">
+        <div class="section-header">
+          <p class="eyebrow">Timeline</p>
+          <h2>Standard timeline</h2>
+          <p>This keeps a simple linear spine for step-by-step storytelling.</p>
+        </div>
+        <div data-component="timeline"></div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="container">
+        <div class="section-header">
+          <p class="eyebrow">Timeline</p>
+          <h2>Staggered timeline</h2>
+          <p>This is the alternating left/right version for more visual storytelling.</p>
+        </div>
+        <div data-component="staggered-timeline"></div>
+      </div>
+    </section>
+
+    <section class="section section--alt reveal" id="accordion">
+      <div class="container">
+        <div class="section-header">
+          <p class="eyebrow">Accordion</p>
+          <h2>Expandable FAQ content</h2>
+          <p>Ideal for compact answers and service details.</p>
+        </div>
+        <div data-component="accordion"></div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <p class="eyebrow">Form</p>
+          <h2>Lead capture form</h2>
+          <p>The form renderer supports standard inputs, selects, textareas, and Netlify wiring.</p>
+        </div>
+        <div data-component="form"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Mounted footer -->
+  <div data-component="footer"></div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
