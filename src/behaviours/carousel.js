@@ -1,11 +1,27 @@
 /* ========================================
    REVIEW CAROUSEL
    ----------------------------------------
-   Seamless infinite loop with:
-   - auto scroll
-   - pause on hover / focus
-   - avatar initials
+   Creates a seamless, infinitely looping
+   horizontal carousel.
+
+   Features:
+   - Continuous auto-scroll using requestAnimationFrame
+   - Seamless looping via DOM duplication
+   - Pause on hover and focus (accessibility)
+   - Avatar initials generated dynamically
+   - Respects prefers-reduced-motion
+
+   Expected structure:
+   [data-reviews-track]
+     └── .review-card
+           └── .avatar (with data-name)
 ======================================== */
+
+/**
+ * Initializes all review carousels within the root.
+ *
+ * @param {HTMLElement|Document} root
+ */
 
 export function initCarousel(root = document) {
   const tracks = root.querySelectorAll("[data-reviews-track]");

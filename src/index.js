@@ -1,13 +1,23 @@
 /* ========================================
-   PUBLIC ENTRY POINT
+   PUBLIC ENTRY POINT (index.js)
+   ----------------------------------------
+   This file defines the public API of the
+   library. Consumers should import from here
+   rather than deep internal paths.
+
+   Example:
+   import { mountAndInit } from "contractor-ui";
 ======================================== */
 
+/* Core system */
 export { componentRegistry } from "./registry.js";
 export { mountComponents, mountComponent } from "./mount.js";
 export { mountAndInit, initUI } from "./core.js";
 
+/* Utilities */
 export { escapeHtml } from "./utils/escapeHtml.js";
 
+/* Component renderers (optional direct usage) */
 export { renderHeader } from "./components/header.js";
 export { renderFooter } from "./components/footer.js";
 export { renderButton } from "./components/button.js";
@@ -19,6 +29,7 @@ export { renderTimeline } from "./components/timeline.js";
 export { renderStaggeredTimeline } from "./components/staggeredTimeline.js";
 export { renderParallaxScroll } from "./components/parallaxScroll.js";
 
+/* Behaviour initializers */
 export { initNav } from "./behaviours/nav.js";
 export { initReveal } from "./behaviours/reveal.js";
 export { initCarousel } from "./behaviours/carousel.js";

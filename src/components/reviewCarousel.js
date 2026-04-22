@@ -1,64 +1,43 @@
 /* ========================================
    REVIEW CAROUSEL COMPONENT
    ----------------------------------------
-   Returns the track + review cards.
-   The auto-loop behavior is added by JS.
+   Renders horizontally scrollable review
+   cards inside a track container.
+
+   Scrolling/looping behavior is handled
+   by the carousel behaviour module.
 ======================================== */
 
 import { escapeHtml } from "../utils/escapeHtml.js";
 
+/**
+ * Renders a review carousel.
+ *
+ * @param {Object} options
+ * @returns {string}
+ */
 export function renderReviewCarousel(options = {}) {
-  // ========================================
-  // DEFAULT DATA (safe fallback)
-  // ========================================
   const defaultReviews = [
-    {
-      name: "John D.",
-      role: "Homeowner · Brampton",
-      text: "Excellent service. The whole process was clean and professional."
-    },
-    {
-      name: "Sarah M.",
-      role: "Renovation Client · GTA",
-      text: "Fast turnaround and great communication from start to finish."
-    },
-    {
-      name: "Mike R.",
-      role: "Builder · Ontario",
-      text: "The carousel feels smooth and the layout is very easy to scan."
-    },
-    {
-      name: "Emily T.",
-      role: "Property Owner · Peel Region",
-      text: "The team was reliable, careful, and easy to work with."
-    },
-    {
-      name: "Alicia P.",
-      role: "Homeowner · Caledon",
-      text: "Great experience from quote to completion."
-    },
-    {
-      name: "Jordan K.",
-      role: "Builder · York Region",
-      text: "Professional work and a strong final result."
-    }
+    { name: "John D.", role: "Homeowner", text: "Excellent service." },
+    { name: "Sarah M.", role: "Client", text: "Great communication." },
+    { name: "Sarah M.", role: "Client", text: "Great communication." },
+    { name: "Sarah M.", role: "Client", text: "Great communication." },
+    { name: "Sarah M.", role: "Client", text: "Great communication." },
+    { name: "Sarah M.", role: "Client", text: "Great communication." }
   ];
 
-  // ========================================
-  // USE PROVIDED DATA OR FALLBACK
-  // ========================================
   const reviews = options.reviews ?? defaultReviews;
 
-  // ========================================
-  // RENDER
-  // ========================================
   return `
     <div class="reviews-track-wrap">
       <div class="reviews-track" data-reviews-track>
+
         ${reviews
           .map(
             (review) => `
               <article class="review-card card" tabindex="0">
+
+                <!-- Header -->
                 <div class="review-header">
                   <div class="avatar" data-name="${escapeHtml(review.name)}"></div>
                   <div>
@@ -67,8 +46,10 @@ export function renderReviewCarousel(options = {}) {
                   </div>
                 </div>
 
+                <!-- Body -->
                 <p>${escapeHtml(review.text)}</p>
 
+                <!-- Meta -->
                 <div class="review-meta">
                   <span class="stars">★★★★★</span>
                   <img
@@ -79,10 +60,12 @@ export function renderReviewCarousel(options = {}) {
                     decoding="async"
                   />
                 </div>
+
               </article>
             `
           )
           .join("")}
+
       </div>
     </div>
   `;

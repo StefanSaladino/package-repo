@@ -1,9 +1,9 @@
 {
   "name": "@stefansaladino/contractor-ui",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Reusable contractor website design system",
   "type": "module",
-  "main": "./src/index.js",
+  "main": "src/index.js",
   "exports": {
     ".": "./src/index.js",
     "./styles.css": "./src/styles/styles.css"
@@ -21,5 +21,13 @@
     "reusable-ui",
     "esm"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StefanSaladino/package-repo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/StefanSaladino/package-repo/issues"
+  },
+  "homepage": "https://github.com/StefanSaladino/package-repo#readme",
   "license": "MIT"
 }

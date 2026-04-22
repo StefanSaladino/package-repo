@@ -1,54 +1,90 @@
 /* ========================================
    MOBILE NAVIGATION
    ----------------------------------------
-   Handles hamburger toggle, outside click,
-   escape key, and menu link closing.
+   Controls the responsive navigation menu.
+
+   Features:
+   - Hamburger toggle
+   - Click outside to close
+   - Escape key support
+   - Auto-close on link click
+   - Reset on viewport resize
+   - ARIA state synchronization
+
+   Expected structure:
+   .site-header
+     ├── #hamburger
+     └── #mobileMenu
 ======================================== */
 
+/**
+ * Initializes mobile navigation behavior.
+ */
 export function initNav() {
   const header = document.querySelector(".site-header");
   const hamburger = document.getElementById("hamburger");
   const mobileMenu = document.getElementById("mobileMenu");
 
+  // Guard: required elements must exist
   if (!header || !hamburger || !mobileMenu) return;
-  if (header.dataset.navInitialized === "true") return;
 
+  // Prevent duplicate initialization
+  if (header.dataset.navInitialized === "true") return;
   header.dataset.navInitialized = "true";
 
+  /**
+   * Closes the mobile menu and resets state.
+   */
   const closeMenu = () => {
     hamburger.classList.remove("active");
     mobileMenu.classList.remove("active");
+
     hamburger.setAttribute("aria-expanded", "false");
     mobileMenu.setAttribute("aria-hidden", "true");
   };
 
+  /**
+   * Toggles mobile menu visibility.
+   *
+   * @param {Event} event
+   */
   const toggleMenu = (event) => {
     event.stopPropagation();
 
     const isOpen = mobileMenu.classList.toggle("active");
+
     hamburger.classList.toggle("active", isOpen);
     hamburger.setAttribute("aria-expanded", String(isOpen));
     mobileMenu.setAttribute("aria-hidden", String(!isOpen));
   };
 
+  /* ========================================
+     EVENT BINDINGS
+  ======================================== */
+
+  // Toggle via hamburger
   hamburger.addEventListener("click", toggleMenu);
 
+  // Close when clicking outside header
   document.addEventListener("click", (event) => {
     if (!event.target.closest(".site-header")) {
       closeMenu();
     }
   });
 
+  // Close on Escape key
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       closeMenu();
     }
   });
 
+  // Close when clicking any mobile nav link
   mobileMenu.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", closeMenu);
   });
 
+  // Reset on desktop breakpoint
   window.addEventListener("resize", () => {
     if (window.innerWidth >= 992) {
       closeMenu();

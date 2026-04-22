@@ -1,12 +1,23 @@
 /* ========================================
    FOOTER COMPONENT
    ----------------------------------------
-   Flexible footer with columns and optional
-   map/embed area.
+   Flexible multi-column footer with:
+   - Branding section
+   - Navigation columns
+   - Optional embedded map
+   - Dynamic copyright
+
+   Designed for service/contractor sites.
 ======================================== */
 
 import { escapeHtml } from "../utils/escapeHtml.js";
 
+/**
+ * Renders a list of footer links.
+ *
+ * @param {Array} items
+ * @returns {string}
+ */
 function renderFooterLinks(items = []) {
   return `
     <ul class="footer-links">
@@ -16,7 +27,10 @@ function renderFooterLinks(items = []) {
             return `<li>${escapeHtml(item.label || "")}</li>`;
           }
 
-          const target = item.target ? ` target="${escapeHtml(item.target)}"` : "";
+          const target = item.target
+            ? ` target="${escapeHtml(item.target)}"`
+            : "";
+
           const rel =
             item.target === "_blank"
               ? ` rel="${escapeHtml(item.rel || "noopener noreferrer")}"`
@@ -37,6 +51,12 @@ function renderFooterLinks(items = []) {
   `;
 }
 
+/**
+ * Renders the site footer.
+ *
+ * @param {Object} options
+ * @returns {string}
+ */
 export function renderFooter({
   brandName = "Contractor UI",
   tagline = "Reusable design system",
@@ -44,43 +64,24 @@ export function renderFooter({
   logoSrc = "",
   logoAlt = "Logo",
   logoLetter = "",
-  columns = [
-    {
-      title: "Explore",
-      items: [
-        { label: "Home", href: "#hero" },
-        { label: "Cards", href: "#cards" },
-        { label: "Reviews", href: "#reviews" }
-      ]
-    },
-    {
-      title: "Resources",
-      items: [
-        { label: "Accordion", href: "#accordion" },
-        { label: "Timeline", href: "#timeline" },
-        { label: "Contact", href: "#contact" }
-      ]
-    },
-    {
-      title: "Contact",
-      items: [
-        { label: "+1 (000) 000-0000", href: "tel:+10000000000" },
-        { label: "hello@example.com", href: "mailto:hello@example.com" }
-      ]
-    }
-  ],
+  columns = [],
   mapSrc = "",
   copyrightText = `© ${new Date().getFullYear()} ${brandName}. All rights reserved.`
 } = {}) {
-  const letter = logoLetter || (brandName ? brandName.trim()[0] : "C");
+  const letter =
+    logoLetter || (brandName ? brandName.trim()[0] : "C");
 
+  // Logo fallback (image or letter mark)
   const logoMarkup = logoSrc
     ? `<img class="brand-logo" src="${escapeHtml(logoSrc)}" alt="${escapeHtml(logoAlt)}" />`
     : `<span class="brand-mark" aria-hidden="true">${escapeHtml(letter)}</span>`;
 
   return `
     <footer class="site-footer">
+
       <div class="container footer-grid">
+
+        <!-- Branding -->
         <div class="footer-branding">
           <div class="footer-brand">
             ${logoMarkup}
@@ -92,6 +93,7 @@ export function renderFooter({
           <p class="footer-description">${escapeHtml(description)}</p>
         </div>
 
+        <!-- Navigation Columns -->
         ${columns
           .map(
             (column) => `
@@ -106,6 +108,7 @@ export function renderFooter({
         ${
           mapSrc
             ? `
+              <!-- Optional Embedded Map -->
               <div class="footer-media">
                 <iframe
                   title="${escapeHtml(brandName)} location map"
@@ -118,11 +121,14 @@ export function renderFooter({
             `
             : ""
         }
+
       </div>
 
+      <!-- Footer Bottom -->
       <div class="container footer-bottom">
         <p>${escapeHtml(copyrightText)}</p>
       </div>
+
     </footer>
   `;
 }

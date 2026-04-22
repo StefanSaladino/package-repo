@@ -1,7 +1,22 @@
 /* ========================================
    COMPONENT REGISTRY
    ----------------------------------------
-   Maps component names to their renderers.
+   Central mapping of component identifiers
+   to their respective render functions.
+
+   This acts as the "source of truth" for all
+   UI components available in the system.
+
+   Each component must expose a `render(props)`
+   function that returns an HTML string.
+
+   Adding a new component:
+   1. Create the component file in /components
+   2. Import its render function here
+   3. Register it in the object below
+
+   This enables declarative usage via:
+   <div data-component="component-name"></div>
 ======================================== */
 
 import { renderHeader } from "./components/header.js";
@@ -15,6 +30,10 @@ import { renderTimeline } from "./components/timeline.js";
 import { renderStaggeredTimeline } from "./components/staggeredTimeline.js";
 import { renderParallaxScroll } from "./components/parallaxScroll.js";
 
+/**
+ * Registry object mapping component names
+ * (used in HTML data attributes) to their renderers.
+ */
 export const componentRegistry = {
   header: { render: renderHeader },
   footer: { render: renderFooter },

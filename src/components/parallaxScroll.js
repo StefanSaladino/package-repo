@@ -1,21 +1,29 @@
 /* ========================================
    PARALLAX SCROLL COMPONENT
    ----------------------------------------
-   A split layout with a moving image layer.
-   Mounted via data-component="parallax-scroll".
+   Split layout section with a parallax
+   image layer and static content block.
+
+   Motion behavior is controlled by the
+   parallax behaviour module via data attrs.
 ======================================== */
 
 import { escapeHtml } from "../utils/escapeHtml.js";
 
+/**
+ * Renders a parallax scroll section.
+ *
+ * @param {Object} options
+ * @returns {string}
+ */
 export function renderParallaxScroll(options = {}) {
   const defaults = {
     eyebrow: "Parallax Scroll",
     title: "Layered motion with depth",
     text:
       "This section adds a subtle parallax shift to create visual rhythm without overwhelming the page.",
-    imageSrc:
-      "https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=1600&q=80",
-    imageAlt: "Construction and service work visual",
+    imageSrc: "",
+    imageAlt: "",
     ctaLabel: "Learn More",
     ctaHref: "#contact",
     imagePosition: "center center",
@@ -33,18 +41,25 @@ export function renderParallaxScroll(options = {}) {
       data-parallax-speed="${escapeHtml(String(settings.speed))}"
       data-parallax-scale="${escapeHtml(String(settings.scale))}"
     >
+
       <div class="container parallax-scroll-grid">
+
+        <!-- Text Content -->
         <div class="parallax-scroll-copy">
           ${settings.eyebrow ? `<span class="eyebrow">${escapeHtml(settings.eyebrow)}</span>` : ""}
           <h2>${escapeHtml(settings.title)}</h2>
           <p>${escapeHtml(settings.text)}</p>
+
           ${
             settings.ctaLabel
-              ? `<a class="btn btn-brand" href="${escapeHtml(settings.ctaHref)}">${escapeHtml(settings.ctaLabel)}</a>`
+              ? `<a class="btn btn-brand" href="${escapeHtml(settings.ctaHref)}">
+                  ${escapeHtml(settings.ctaLabel)}
+                </a>`
               : ""
           }
         </div>
 
+        <!-- Media -->
         <div class="parallax-scroll-media">
           <div class="parallax-scroll-frame">
             <img
@@ -58,6 +73,7 @@ export function renderParallaxScroll(options = {}) {
             />
           </div>
         </div>
+
       </div>
     </section>
   `;
