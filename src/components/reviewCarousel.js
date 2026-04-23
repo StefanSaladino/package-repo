@@ -53,7 +53,7 @@ export function renderReviewCarousel(options = {}) {
                 <div class="review-meta">
                   <span class="stars">★★★★★</span>
                   <img
-                    src="../src/assets/Google_Favicon_2025.svg.png"
+                    src="node_modules/@stefansaladino/contractor-ui/src/assets/Google_Favicon_2025.svg.png"
                     alt="Google review"
                     class="google-icon"
                     loading="lazy"
