@@ -1,6 +1,6 @@
 {
   "name": "@stefansaladino/contractor-ui",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Reusable contractor website design system",
   "type": "module",
   "main": "src/index.js",
