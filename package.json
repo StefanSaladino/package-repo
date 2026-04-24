@@ -11,6 +11,7 @@
   "files": [
     "src"
   ],
+  "types": "./src/index.d.ts",
   "sideEffects": [
     "./src/styles/styles.css"
   ],

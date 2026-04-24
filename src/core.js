@@ -34,6 +34,16 @@ export async function mountAndInit(root = document) {
 }
 
 /**
+ * Primary entry point (recommended).
+ * Mounts all components and initializes behaviours.
+ *
+ * @param {HTMLElement|Document} root
+ */
+export async function initAll(root = document) {
+  await mountAndInit(root);
+}
+
+/**
  * Initializes all behaviour modules.
  * Each module is responsible for attaching
  * event listeners and DOM interactions.

@@ -1,23 +1,26 @@
 /* ========================================
    PUBLIC ENTRY POINT (index.js)
-   ----------------------------------------
-   This file defines the public API of the
-   library. Consumers should import from here
-   rather than deep internal paths.
-
-   Example:
-   import { mountAndInit } from "contractor-ui";
 ======================================== */
 
-/* Core system */
+/* ========================================
+   PRIMARY API (recommended usage)
+======================================== */
+export { initAll, mountAndInit, initUI } from "./core.js";
+
+/* ========================================
+   COMPONENT SYSTEM (advanced usage)
+======================================== */
 export { componentRegistry } from "./registry.js";
 export { mountComponents, mountComponent } from "./mount.js";
-export { mountAndInit, initUI } from "./core.js";
 
-/* Utilities */
+/* ========================================
+   UTILITIES
+======================================== */
 export { escapeHtml } from "./utils/escapeHtml.js";
 
-/* Component renderers (optional direct usage) */
+/* ========================================
+   COMPONENT RENDERERS (optional direct usage)
+======================================== */
 export { renderHeader } from "./components/header.js";
 export { renderFooter } from "./components/footer.js";
 export { renderButton } from "./components/button.js";
@@ -29,7 +32,9 @@ export { renderTimeline } from "./components/timeline.js";
 export { renderStaggeredTimeline } from "./components/staggeredTimeline.js";
 export { renderParallaxScroll } from "./components/parallaxScroll.js";
 
-/* Behaviour initializers */
+/* ========================================
+   BEHAVIOUR INITIALIZERS (power users)
+======================================== */
 export { initNav } from "./behaviours/nav.js";
 export { initReveal } from "./behaviours/reveal.js";
 export { initCarousel } from "./behaviours/carousel.js";
