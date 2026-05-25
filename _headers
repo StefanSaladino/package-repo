@@ -1,0 +1,31 @@
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'
+
+/*.v*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.v*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable

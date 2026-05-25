@@ -1,24 +1,15 @@
 /* ========================================
    FORM COMPONENT
    ----------------------------------------
-   Dynamic form renderer with support for:
-   - Input fields (text, email, tel, etc.)
-   - Textareas
-   - Select dropdowns
-   - Netlify form handling
-
-   Designed for flexible contact forms and
-   lead capture scenarios.
+   Flexible form renderer with support for:
+   - text/email/tel/etc.
+   - textarea
+   - select
+   - Netlify form wiring
 ======================================== */
 
 import { escapeHtml } from "../utils/escapeHtml.js";
 
-/**
- * Renders a single form field based on type.
- *
- * @param {Object} field
- * @returns {string}
- */
 function renderField(field = {}) {
   const {
     label = "",
@@ -32,15 +23,11 @@ function renderField(field = {}) {
   } = field;
 
   const req = required ? " required" : "";
-  const auto = autocomplete
-    ? ` autocomplete="${escapeHtml(autocomplete)}"`
-    : "";
-
+  const auto = autocomplete ? ` autocomplete="${escapeHtml(autocomplete)}"` : "";
   const safeName = escapeHtml(name);
   const safeLabel = escapeHtml(label);
   const safePlaceholder = escapeHtml(placeholder);
 
-  // Textarea field
   if (type === "textarea") {
     return `
       <div class="field">
@@ -49,7 +36,7 @@ function renderField(field = {}) {
           class="input"
           id="${safeName}"
           name="${safeName}"
-          rows="${escapeHtml(rows)}"
+          rows="${Number(rows)}"
           placeholder="${safePlaceholder}"
           ${req}${auto}
         ></textarea>
@@ -57,7 +44,6 @@ function renderField(field = {}) {
     `;
   }
 
-  // Select field
   if (type === "select") {
     return `
       <div class="field">
@@ -67,9 +53,7 @@ function renderField(field = {}) {
           ${options
             .map(
               (option) => `
-                <option value="${escapeHtml(option.value)}">
-                  ${escapeHtml(option.label)}
-                </option>
+                <option value="${escapeHtml(option.value)}">${escapeHtml(option.label)}</option>
               `
             )
             .join("")}
@@ -78,7 +62,6 @@ function renderField(field = {}) {
     `;
   }
 
-  // Default input field
   return `
     <div class="field">
       <label for="${safeName}">${safeLabel}</label>
@@ -94,19 +77,17 @@ function renderField(field = {}) {
   `;
 }
 
-/**
- * Renders a full form element.
- *
- * @param {Object} options
- * @returns {string}
- */
 export function renderForm({
   action = "#",
   method = "POST",
   netlifyName = "",
   submitLabel = "Submit",
   note = "",
-  fields = []
+  fields = [
+    { label: "Name", name: "name", placeholder: "Your name", required: true, autocomplete: "name" },
+    { label: "Email", name: "email", type: "email", placeholder: "Email address", required: true, autocomplete: "email" },
+    { label: "Message", name: "message", type: "textarea", placeholder: "Tell us what you need...", required: true, rows: 5 }
+  ]
 } = {}) {
   const isNetlify = Boolean(netlifyName);
 
@@ -117,7 +98,6 @@ export function renderForm({
       method="${escapeHtml(method)}"
       ${isNetlify ? 'data-netlify="true" netlify-honeypot="bot-field"' : ""}
     >
-
       ${
         isNetlify
           ? `<input type="hidden" name="form-name" value="${escapeHtml(netlifyName)}" />`
@@ -127,7 +107,6 @@ export function renderForm({
       ${
         isNetlify
           ? `
-            <!-- Honeypot field for spam protection -->
             <p class="sr-only">
               <label>Do not fill this out: <input name="bot-field" /></label>
             </p>
@@ -135,16 +114,11 @@ export function renderForm({
           : ""
       }
 
-      <!-- Dynamic Fields -->
       ${fields.map(renderField).join("")}
 
-      <!-- Submit Button -->
-      <button class="btn btn-brand" type="submit">
-        ${escapeHtml(submitLabel)}
-      </button>
+      <button class="btn btn-brand" type="submit">${escapeHtml(submitLabel)}</button>
 
       ${note ? `<p class="form-note">${escapeHtml(note)}</p>` : ""}
-
     </form>
   `;
 }

@@ -21,73 +21,78 @@
  * Initializes mobile navigation behavior.
  */
 export function initNav() {
-  const header = document.querySelector(".site-header");
-  const hamburger = document.getElementById("hamburger");
-  const mobileMenu = document.getElementById("mobileMenu");
+  const headers = document.querySelectorAll(".site-header");
 
-  // Guard: required elements must exist
-  if (!header || !hamburger || !mobileMenu) return;
+  if (!headers.length) return;
 
-  // Prevent duplicate initialization
-  if (header.dataset.navInitialized === "true") return;
-  header.dataset.navInitialized = "true";
+  headers.forEach((header) => {
+    // Prevent duplicate initialization
+    if (header.dataset.navInitialized === "true") return;
+    header.dataset.navInitialized = "true";
 
-  /**
-   * Closes the mobile menu and resets state.
-   */
-  const closeMenu = () => {
-    hamburger.classList.remove("active");
-    mobileMenu.classList.remove("active");
+    const hamburger = header.querySelector("[data-mobile-menu-toggle]");
+    const mobileMenu = header.querySelector("[data-mobile-menu]");
 
-    hamburger.setAttribute("aria-expanded", "false");
-    mobileMenu.setAttribute("aria-hidden", "true");
-  };
+    // Guard: required elements must exist
+    if (!header || !hamburger || !mobileMenu) return;
 
-  /**
-   * Toggles mobile menu visibility.
-   *
-   * @param {Event} event
-   */
-  const toggleMenu = (event) => {
-    event.stopPropagation();
+    /**
+     * Closes the mobile menu and resets state.
+     */
+    const closeMenu = () => {
+      hamburger.classList.remove("active");
+      mobileMenu.classList.remove("active");
 
-    const isOpen = mobileMenu.classList.toggle("active");
+      hamburger.setAttribute("aria-expanded", "false");
+      mobileMenu.setAttribute("aria-hidden", "true");
+    };
 
-    hamburger.classList.toggle("active", isOpen);
-    hamburger.setAttribute("aria-expanded", String(isOpen));
-    mobileMenu.setAttribute("aria-hidden", String(!isOpen));
-  };
+    /**
+     * Toggles mobile menu visibility.
+     *
+     * @param {Event} event
+     */
+    const toggleMenu = (event) => {
+      event.stopPropagation();
 
-  /* ========================================
-     EVENT BINDINGS
-  ======================================== */
+      const isOpen = mobileMenu.classList.toggle("active");
 
-  // Toggle via hamburger
-  hamburger.addEventListener("click", toggleMenu);
+      hamburger.classList.toggle("active", isOpen);
+      hamburger.setAttribute("aria-expanded", String(isOpen));
+      mobileMenu.setAttribute("aria-hidden", String(!isOpen));
+    };
 
-  // Close when clicking outside header
-  document.addEventListener("click", (event) => {
-    if (!event.target.closest(".site-header")) {
-      closeMenu();
-    }
-  });
+    /* ========================================
+       EVENT BINDINGS
+    ======================================== */
 
-  // Close on Escape key
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      closeMenu();
-    }
-  });
+    // Toggle via hamburger
+    hamburger.addEventListener("click", toggleMenu);
 
-  // Close when clicking any mobile nav link
-  mobileMenu.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", closeMenu);
-  });
+    // Close when clicking outside header
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest(".site-header")) {
+        closeMenu();
+      }
+    });
 
-  // Reset on desktop breakpoint
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 992) {
-      closeMenu();
-    }
+    // Close on Escape key
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    });
+
+    // Close when clicking any mobile nav link
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    // Reset on desktop breakpoint
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 992) {
+        closeMenu();
+      }
+    });
   });
 }

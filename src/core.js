@@ -1,16 +1,11 @@
 /* ========================================
    CORE INITIALIZER (core.js)
    ----------------------------------------
-   Orchestrates full UI initialization.
-
-   Execution order:
-   1. Mount all components (HTML injection)
-   2. Initialize interactive behaviours
-
-   This separation ensures:
-   - DOM exists before JS binds to it
-   - Predictable lifecycle
+   Mounts components first, then initializes
+   all behaviour modules.
 ======================================== */
+
+import "./styles/styles.css";
 
 import { mountComponents } from "./mount.js";
 

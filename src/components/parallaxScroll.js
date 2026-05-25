@@ -4,7 +4,7 @@
    Split layout section with a parallax
    image layer and static content block.
 
-   Motion behavior is controlled by the
+   Motion behaviour is controlled by the
    parallax behaviour module via data attrs.
 ======================================== */
 

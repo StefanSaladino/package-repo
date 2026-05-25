@@ -1,20 +1,32 @@
 {
   "name": "@stefansaladino/contractor-ui",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "Reusable contractor website design system",
   "type": "module",
-  "main": "src/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "exports": {
-    ".": "./src/index.js",
-    "./styles.css": "./src/styles/styles.css"
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./advanced": {
+      "import": "./dist/advanced.js"
+    },
+    "./styles.css": "./dist/styles.css"
   },
   "files": [
-    "src"
+    "dist",
+    "src/index.d.ts"
   ],
   "types": "./src/index.d.ts",
   "sideEffects": [
-    "./src/styles/styles.css"
+    "./dist/styles.css"
   ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "prepublishOnly": "npm run build"
+  },
   "keywords": [
     "design-system",
     "contractor",
@@ -30,5 +42,8 @@
     "url": "https://github.com/StefanSaladino/package-repo/issues"
   },
   "homepage": "https://github.com/StefanSaladino/package-repo#readme",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^8.0.14"
+  }
 }

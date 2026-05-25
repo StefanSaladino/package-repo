@@ -29,10 +29,6 @@ export function initParallax(root = document) {
 
   if (!sections.length) return;
 
-  // Prevent multiple global initializations
-  if (window.__contractorParallaxInitialized) return;
-  window.__contractorParallaxInitialized = true;
-
   // Accessibility: reduce motion if user prefers
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
